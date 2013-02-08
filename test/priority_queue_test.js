@@ -53,7 +53,7 @@ var suite = vows.describe('priority queue').addBatch(
 function isPriorityQueue(t) { assert.instanceOf(t.queue, PriorityQueue) }
 function hasLength(n) { 
   return function(t) {
-    assert.strictEqual(t.queue.length, n) 
+    assert.strictEqual(t.queue.length(), n) 
     assert.strictEqual(t.store.length, n) 
   }
 }
@@ -87,10 +87,10 @@ function makeQueue(compare, initital_data) {
 
 function assertOrdering(test) {
   return function(t) {
-    assert.isTrue(t.queue.length > 0)
+    assert.isTrue(t.queue.length() > 0)
     var p = t.queue.shift(), v;
     assertHeap(t)
-    while (t.queue.length > 0) {
+    while (t.queue.length() > 0) {
       v = t.queue.shift();
       assertHeap(t)
       assert.isTrue(test(v,p))
